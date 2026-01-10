@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INI TABEL</title>
+</head>
+<body>
+    <table border = "1" cellpadding=""10>
+        <tr>
+            <td>nama</td>
+            <td>npm</td>
+            <td>kelas</td>
+        </tr>
+        <tr>
+            <td>kevin</td>
+            <td>50423689</td>
+            <td>3ia23</td>
+        </tr>
+        <tr>
+            <td>acipupu</td>
+            <td>504233790</td>
+            <td>3ia23</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+CREATE DATABASE UNIVERSITAS;
+
+CRAETE TABLE MAHASISWA(
+    npm VARCHAR(8) PRIMARY KEY,
+    nama VARCHAR(50),
+    kelas VARCHAR(6),
+    jurusan VARCHAR(12)
+);
+
+ALTER TABLE MAHASISWA(npm,nama,kelas,jurusan) VALUES
+(50423689,"KEVIN","3IA23","INFORMATIKA");
+
+SELECT * FROM MAHASISWA;
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INI TABLE</title>
+</head>
+<body>
+    <table border ="1">
+        <tr>
+            <th rowspan = "2">nama</th>
+            <th rowspan="2">nilai</th>
+        </tr>
+        <tr>
+            <th>uts</th>
+            <th>uas</th>
+        </tr>
+        <tr>
+            <td>kevin</td>
+            <td>100</td>
+            <td>100</td>
+        </tr>
+    </table>
+</body>
+</html>
