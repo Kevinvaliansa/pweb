@@ -8,10 +8,8 @@ const ReadByID = () => {
   const handleSearch = async () => {
     if (!searchId) return;
     try {
-      // Fetch data ke endpoint PHP berdasarkan ID
-      const res = await fetch(`http://localhost/pweb/backend/read_by_id.php/${searchId}`);
+      const res = await fetch(`http://localhost/pweb/backend/read_by_id.php?id=${searchId}`);
       const result = await res.json();
-      
       if (result.status === "success") {
         setMhs(result.data);
         setError("");
@@ -19,63 +17,50 @@ const ReadByID = () => {
         setMhs(null);
         setError(result.message);
       }
-    } catch (err) {
-      setError("Gagal terhubung ke server. Pastikan Apache di XAMPP aktif.");
-    }
+    } catch (err) { setError("Gagal terhubung ke server."); }
   };
 
   return (
-    <div style={{ animation: "fadeIn 0.3s" }}>
-      <h3 style={{ color: "#334155", marginBottom: "15px" }}>Cari Mahasiswa (Read By ID)</h3>
-      
-      {/* Input Group - Responsif: Berbaris di Desktop, Menumpuk di HP */}
-      <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap" }}>
-        <input
-          type="number"
-          placeholder="Masukkan ID..."
-          value={searchId}
-          onChange={(e) => setSearchId(e.target.value)}
-          style={{ 
-            flex: "1 1 200px", padding: "12px", borderRadius: "10px", 
-            border: "1px solid #cbd5e1", fontSize: "16px" 
-          }}
+    <div style={{ maxWidth: "500px", margin: "0 auto" }}>
+      <h3 style={{ marginBottom: "20px" }}>Cari Mahasiswa Berdasarkan ID</h3>
+      <div style={{ display: "flex", gap: "10px", marginBottom: "30px" }}>
+        <input 
+          type="number" 
+          placeholder="Masukkan ID..." 
+          value={searchId} 
+          onChange={(e) => setSearchId(e.target.value)} 
+          style={{ flex: 1, padding: "14px", borderRadius: "12px", border: "2px solid #e2e8f0", fontSize: "16px", outline: "none" }} 
         />
         <button 
-          onClick={handleSearch}
-          style={{ 
-            flex: "1 1 100px", padding: "12px", background: "#2563eb", 
-            color: "white", border: "none", borderRadius: "10px", 
-            fontWeight: "bold", cursor: "pointer" 
-          }}
+          onClick={handleSearch} 
+          style={{ padding: "0 24px", background: "#2563eb", color: "white", border: "none", borderRadius: "12px", cursor: "pointer", fontWeight: "bold" }}
         >
           Cari
         </button>
       </div>
 
-      {error && (
-        <p style={{ color: "#ef4444", background: "#fee2e2", padding: "10px", borderRadius: "8px", textAlign: "center" }}>
-          {error}
-        </p>
-      )}
+      {error && <p style={{ color: "#dc2626", background: "#fee2e2", padding: "12px", borderRadius: "12px", textAlign: "center" }}>{error}</p>}
 
-      {/* Hasil Pencarian dalam bentuk Card */}
       {mhs && (
         <div style={{ 
-          marginTop: "10px", padding: "15px", background: "#f8fafc", 
-          borderRadius: "12px", border: "1px solid #e2e8f0" 
+          background: "#f1f5f9", 
+          padding: "24px", 
+          borderRadius: "20px", 
+          border: "1px solid #e2e8f0",
+          boxShadow: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)"
         }}>
-          <div style={{ marginBottom: "10px" }}>
-            <small style={{ color: "#64748b", fontWeight: "bold" }}>NAMA</small>
-            <p style={{ margin: 0, fontSize: "18px", fontWeight: "600" }}>{mhs.nama}</p>
+          <div style={{ marginBottom: "16px" }}>
+            <span style={{ color: "#64748b", fontSize: "12px", fontWeight: "700", textTransform: "uppercase" }}>Nama Mahasiswa</span>
+            <p style={{ margin: "4px 0 0", fontSize: "20px", fontWeight: "700", color: "#1e293b" }}>{mhs.nama}</p>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <small style={{ color: "#64748b", fontWeight: "bold" }}>NPM</small>
-              <p style={{ margin: 0 }}>{mhs.npm}</p>
+              <span style={{ color: "#64748b", fontSize: "12px", fontWeight: "700", textTransform: "uppercase" }}>NPM</span>
+              <p style={{ margin: "4px 0 0", fontSize: "16px", fontWeight: "600" }}>{mhs.npm}</p>
             </div>
             <div>
-              <small style={{ color: "#64748b", fontWeight: "bold" }}>KELAS</small>
-              <p style={{ margin: 0 }}>{mhs.kelas}</p>
+              <span style={{ color: "#64748b", fontSize: "12px", fontWeight: "700", textTransform: "uppercase" }}>Kelas</span>
+              <p style={{ margin: "4px 0 0", fontSize: "16px", fontWeight: "600" }}>{mhs.kelas}</p>
             </div>
           </div>
         </div>
@@ -83,5 +68,4 @@ const ReadByID = () => {
     </div>
   );
 };
-
 export default ReadByID;
