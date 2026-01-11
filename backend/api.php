@@ -4,7 +4,7 @@ header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
-include 'connection.php';
+include 'connection.php'; // Database: pweb
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -12,9 +12,14 @@ if ($method == 'OPTIONS') { exit; }
 
 switch($method) {
     case 'GET':
-        // Mengubah DESC menjadi ASC agar data urut dari ID terkecil ke terbesar
-        $result = $conn->query("SELECT * FROM mahasiswa ORDER BY id ASC");
-        echo json_encode($result->fetch_all(MYSQLI_ASSOC));
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $result = $conn->query("SELECT * FROM mahasiswa WHERE id = $id"); // Tabel: mahasiswa
+            echo json_encode($result->fetch_all(MYSQLI_ASSOC));
+        } else {
+            $result = $conn->query("SELECT * FROM mahasiswa ORDER BY id ASC"); //
+            echo json_encode($result->fetch_all(MYSQLI_ASSOC));
+        }
         break;
 
     case 'POST':
