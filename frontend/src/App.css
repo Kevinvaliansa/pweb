@@ -392,3 +392,31 @@
   font-weight: 600;
   border: 1px solid #fecaca;
 }
+
+/* Animasi Masuk Halaman */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-fade {
+  animation: slideInUp 0.4s ease-out forwards;
+  /* Memastikan konten tidak kaku saat berpindah */
+  will-change: transform, opacity;
+}
+
+/* Tambahan: Efek hover pada tombol navigasi agar tidak kaku */
+.tab-navigation button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-navigation .tab-active {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}

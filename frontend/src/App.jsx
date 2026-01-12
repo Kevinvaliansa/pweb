@@ -5,6 +5,7 @@ import Tabel from "./Components/Tabel";
 import Footer from "./Components/Footer";
 import ReadByID from "./Pages/ReadByID";
 import Home from "./Pages/Home";
+import Biodata from "./Pages/Biodata"; // Import halaman Biodata baru
 import "./App.css";
 
 const App = () => {
@@ -132,7 +133,8 @@ const App = () => {
             { id: 'home', label: '🏠 Dashboard' },
             { id: 'input', label: '➕ Tambah' },
             { id: 'tampil', label: '📋 Daftar' },
-            { id: 'detail', label: '🔍 Cari' }
+            { id: 'detail', label: '🔍 Cari' },
+            { id: 'bio', label: '👤 Biodata' } // Tombol navigasi ke Biodata
           ].map((tab) => (
             <button 
               key={tab.id} 
@@ -175,7 +177,6 @@ const App = () => {
                   placeholder="Contoh: 4IA01" 
                 />
                 
-                {/* Tombol Simpan Oval Modern */}
                 <button onClick={handleSubmit} className="btn-submit-modern">
                   <span>Simpan Data Mahasiswa</span>
                 </button>
@@ -200,6 +201,11 @@ const App = () => {
 
           {view === "detail" && (
             <ReadByID />
+          )}
+
+          {/* Render halaman Biodata */}
+          {view === "bio" && (
+            <Biodata />
           )}
         </main>
 
